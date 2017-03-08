@@ -1,0 +1,110 @@
+HI///////////////////////
+AUTOMATIC POWER FACTOR CORRECTION USING ARDUINO
+CODE>>>>>>>>>>>>>>>>>>>>>>>>>>>>.
+
+
+int pin = 3;
+int cap1 = 6; //2.5 micro farad capacitor
+int cap2 = 7; //2.5 micro farad capacitor
+int cap3 = 8; //2.5 micro farad capacitor
+int cap4 = 9; //2.5 micro farad capacitor
+int cap5 = 10; //4.5 micro farad capacitor
+int cap6 = 11; //4.5 micro farad capacitor
+int cap7 = 12; //10 micro farad capacitor
+int cap8 = 13; //10 micro farad capacitor
+/*Variables will change their value:*/
+double duration,duration1,T=20;
+double si,phi;
+double power_factor;
+void setup()
+{
+pinMode(pin, INPUT);
+Serial.begin(9600);
+pinMode(cap1, OUTPUT);
+pinMode(cap2, OUTPUT);
+pinMode(cap3, OUTPUT);
+pinMode(cap4, OUTPUT);
+pinMode(cap5, OUTPUT);
+pinMode(cap6, OUTPUT);
+pinMode(cap7, OUTPUT);
+pinMode(cap8, OUTPUT);
+}
+void loop()
+{
+Serial.print("\tThe program for the project Automatic Power Factor Detection and Correction has been developed\t\t\t");
+getpf();
+if(power_factor < 0.98)
+{
+Serial.print("\tThe load connected is Inductive in nature, therefore the power factor is inductive innature:\t\t\t");
+
+digitalWrite(cap1, HIGH);
+getpf();
+Serial.print("\tThe corrected Power factor is:\t\t\t");
+Serial.println(power_factor);
+if(power_factor <0.98)
+{
+digitalWrite(cap2, HIGH);
+getpf();
+Serial.print("\tThe corrected Power factor is:\t\t\t");
+Serial.println(power_factor);
+if(power_factor <0.98)
+{
+digitalWrite(cap3, HIGH);
+getpf();
+Serial.print("\tThe corrected Power factor is:\t\t\t");
+Serial.println(power_factor);
+if(power_factor <0.98)
+{
+digitalWrite(cap4, HIGH);
+getpf();
+Serial.print("\tThe corrected Power factor is:\t\t\t");
+Serial.println(power_factor);
+if(power_factor <0.98)
+{
+digitalWrite(cap5, HIGH);
+getpf();
+Serial.print("\tThe corrected Power factor is:\t\t\t");
+Serial.println(power_factor);
+if(power_factor <0.98)
+{
+digitalWrite(cap6, HIGH);
+getpf();
+Serial.print("\tThe correctedPower factor is:\t\t\t");
+Serial.println(power_factor);
+
+if(power_factor <0.98)
+{
+digitalWrite(cap7, HIGH);
+getpf();
+Serial.print("\tThe corrected Powerfactor is:\t\t\t");
+Serial.println(power_factor);
+
+if(power_factor <0.98)
+{
+digitalWrite(cap8, HIGH);
+getpf();
+Serial.print("\tThe correctedower factor is:\t\t\t");
+Serial.println(power_factor);
+}
+}
+}
+}
+}
+}
+}
+}
+
+else if(power_factor >= 0.98)
+{
+Serial.print("\tThe circuit has a resistive load, hence the normal power factor is:\t\t\t");
+Serial.println(power_factor);
+}
+}
+void getpf()
+{
+duration = pulseIn(pin, HIGH);
+duration1=(duration/1000);
+si=(duration1/20);
+phi=(si*360);
+power_factor=cos(phi/57.2);
+}
